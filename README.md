@@ -65,7 +65,6 @@ zk-init --help
 ## 命令参数说明
 ```
 -v --version 查看版本号
-templatename 直接写模板名，直接初始化对应得模板
 -t --templatename 模板名
 -r --rename 重命名文件夹
 -n --nofolder 没有顶层文件夹
