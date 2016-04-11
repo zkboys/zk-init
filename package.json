@@ -1,0 +1,14 @@
+{
+  "name": "program-generator",
+  "version": "1.0.0",
+  "description": "各种项目初始模板生成工具",
+  "main": "index.js",
+  "bin": {
+    "zkboys-init": "./bin/zkboys-init"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
