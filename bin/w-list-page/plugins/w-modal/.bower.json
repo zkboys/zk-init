@@ -1,0 +1,24 @@
+{
+  "name": "w-modal",
+  "homepage": "https://github.com/zkboys/w-modal",
+  "license": "MIT",
+  "ignore": [],
+  "keywords": [
+    "modal",
+    "bootstrap"
+  ],
+  "devDependencies": {
+    "bootstrap": "~3.3.6",
+    "jquery": "~2.1.4"
+  },
+  "_release": "0893355a49",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "0893355a49cf734d1d2b6777e544d54ffe636868"
+  },
+  "_source": "git://github.com/zkboys/w-modal.git",
+  "_target": "*",
+  "_originalSource": "w-modal",
+  "_direct": true
+}

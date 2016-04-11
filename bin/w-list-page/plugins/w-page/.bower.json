@@ -1,0 +1,25 @@
+{
+  "name": "w-page",
+  "homepage": "https://github.com/zkboys/w-page",
+  "version": "0.0.2",
+  "license": "MIT",
+  "ignore": [],
+  "keywords": [
+    "pagination",
+    "bootstrap"
+  ],
+  "devDependencies": {
+    "bootstrap": "~3.3.6",
+    "jquery": "~2.1.4"
+  },
+  "_release": "0.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.2",
+    "commit": "c57e6c89353736f4048bd319f39a79ae0838e42e"
+  },
+  "_source": "git://github.com/zkboys/w-page.git",
+  "_target": "~0.0.2",
+  "_originalSource": "w-page",
+  "_direct": true
+}

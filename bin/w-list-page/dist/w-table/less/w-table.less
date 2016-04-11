@@ -1,0 +1,76 @@
+.w-table {
+  margin-bottom: 0;
+  table-layout: fixed;
+  thead {
+    tr {
+      th {
+        text-align: center;
+        vertical-align: middle !important; /*垂直居中*/
+        word-break: keep-all;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        input[type=checkbox] {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  tbody {
+    tr {
+      td {
+        vertical-align: middle !important; /*垂直居中*/
+        word-break: keep-all;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        &.w-table-index {
+          text-align: center;
+        }
+        &.w-table-check {
+          text-align: center;
+          input[type=checkbox] {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+
+.table-wrap {
+  position: relative;
+  padding: 0 15px;
+  width: 100%;
+  height: 1000px;
+  .top-scroll-cover {
+    width: 20px;
+    height: 40px;
+    background: #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 999;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+  }
+  .top {
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+  .center {
+    overflow-x: auto;
+    overflow-y: scroll;
+    border-bottom: 1px solid #ddd;
+    .table-bordered {
+      border-top: 0;
+      & tr:first-child td {
+        border-top: 0;
+      }
+    }
+  }
+  .table-bordered > thead > tr > th {
+    border-bottom: 1px;
+  }
+}

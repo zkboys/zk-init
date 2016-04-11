@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap table plugin</title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/iCheck/1.0.1/skins/all.css" rel="stylesheet">
+    <link href="dist/css/w-table.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        自定义表格组件
+    </div>
+    <div class="panel-body">
+        <div style="padding-bottom:10px;padding-left:15px;">
+            <div class="btn btn-default load">加载数据</div>
+            <div class="btn btn-warning get-selected-count">获取选中行个数</div>
+            <div class="btn btn-success get-selected-row-data">获取选中行数据</div>
+            <div class="btn btn-info get-selected-row-primary-key">获取选中行主键值</div>
+            <div class="btn btn-warning delete-selected-row">删除选中行</div>
+            <div class="btn btn-danger delete-row">删除指定行</div>
+        </div>
+        <div id="table-wrap" class="table-wrap" style="height:400px;"></div>
+    </div>
+</div>
+
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/iCheck/1.0.1/icheck.min.js"></script>
+<script src="dist/js/w-table.js"></script>
+<script>
+    /*
+     关于columns宽度（width）的说明：
+     如果是数字：单位为px
+     如果是字符串：要表明单位：px或%
+     如果缺省，或者单位为%，所有的缺省或者%的列，宽度将根据比例自适应，其他列宽度固定
+     如果都指定了确定的宽度，所有的列在表格足够宽的情况下，按照比例自适应，表格宽度不够时，将出现横向滚动条。
+
+     一般内容固定的列设置一个确定的宽度，内容不固定的列，width属性缺省，或者写成%
+
+     注意：width不固定的列，当表格宽度一直缩小时，此列宽最后会变成0
+            width最好不要缺省，如果有自适应列宽，最好保证所有列宽设置的百分比之和为100（或者大于100），否则会出现其他固定宽度的列宽并不固定的情况。
+     * */
+    var columns = [//列配置信息
+        {
+            name: '姓名',
+            title: '用户注册时候填写的姓名',
+            field: 'name',
+            width: 80,// 如果是数字，默认单位是px，如果是字符串，需要明确写上px单位，如果字符串不写单位，视为此列宽度自适应。
+            align: "left"
+        },
+        {
+            name: "年龄",
+            title: "自定义title，年龄",
+            field: "age",
+            width: '20%',
+            minWidth: 300,// 自适应列的最小宽度，只有自适应列才起作用。
+            align: "center"
+        },
+        {
+            name: "职位",
+            field: "position",
+            width: '30%',
+            minWidth: '100px',
+            align: "center",
+            valueFilter: function (value, rowData, tableData) {
+                return value;
+            }
+        },
+        {
+            name: "入职时间",
+            field: "enter",
+            width: "120px",
+            align: "center",
+            valueFilter: function (value, rowData, tableData) {
+                return value + '年';
+            }
+        }
+    ];
+    var tableData = createTableData();
+    function createTableData(index) {
+        //构造测试数据
+        index = index || 0;
+        var tableData = [];
+        for (var i = index; i < 100; i++) {
+            tableData.push({
+                id: i,
+                name: 'jone' + i,
+                age: '25',
+                position: 'IT',
+                enter: '2015'
+
+            });
+        }
+        return tableData;
+    }
+    var operation = function (rowData, tableData) {
+        //操作列内容，返回往操作列插入的内容
+        var operations = [];
+        operations.push('<button class="btn btn-info btn-xs detail">详情</button>');
+        operations.push('<button class="btn btn-danger btn-xs delete">删除</button>');
+        return operations.join('&nbsp;');
+    };
+    $(document).on('click', '.btn.delete', function () {
+        //行内按钮绑定事件，由于可能会用ajax重新载入数据，这里要使用事件委托
+        var $this = $(this);
+        var $row = $this.parents('tr');
+        var rowData = $row.data('rowData');
+        console.log(rowData);
+        wt.wTable('deleteRow', $row);
+    });
+    $(document).on('click', '.btn.detail', function () {
+        var $this = $(this);
+        var rowData = $this.parents('tr').data('rowData');
+        console.log(rowData);
+    });
+    var wt = $('#table-wrap').wTable({
+        showCheckbox: true,//是否显示checkbox列 默认true
+        showRowIndex: true,//是否显示行号 默认false
+        rowIndexStart: 1,//行号开始值 默认1
+        columns: columns,//各列的配置信息 默认[]
+        tableData: tableData,//表格初始化数据
+        operationWidth: 100,
+        operation: operation,
+        primaryKey: "id"//主键，每行具有唯一性
+    });
+    $('.load').click(function () {
+        // 一般执行ajax请求之后，会调用此方法重新载入数据
+        var tableData = createTableData(20);
+        wt.wTable('load', tableData);
+    });
+    $('.get-selected-count').click(function () {
+        //一般可以用做批量删除之前判断是否有选中数据
+        var selectedCount = wt.wTable('getSelectedRowsCount');
+        console.log(selectedCount);
+    });
+    $('.get-selected-row-data').click(function () {
+        //获取选中行数据，一个json，k为每一行的主键：primaryKey，v为：rowData
+        var selectedRowsData = wt.wTable('getSelectedRowsData');
+        console.log(selectedRowsData);
+    });
+    $('.get-selected-row-primary-key').click(function () {
+        var selectedRowsValue = wt.wTable('getSelectedRowsPrimaryKey');
+        //返回一个数组，内容为每一行的primaryKey，一般传给后台、根据id进行删除操作。
+        console.log(selectedRowsValue);
+    });
+    $('.delete-selected-row').click(function () {
+        //删除选中行，一般用于批量删除
+        wt.wTable('deleteSelectedRows');
+    });
+    $('.delete-row').click(function () {
+        //删除指定行，一般是行内的删除按钮会调用此方法
+        var $row = wt.find('tr:eq(10)');
+        wt.wTable('deleteRow', $row);
+    });
+</script>
+</body>
+</html>

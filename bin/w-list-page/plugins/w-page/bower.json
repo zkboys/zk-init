@@ -1,0 +1,15 @@
+{
+  "name": "w-page",
+  "homepage": "https://github.com/zkboys/w-page",
+  "version": "0.0.2",
+  "license": "MIT",
+  "ignore": [],
+  "keywords": [
+    "pagination",
+    "bootstrap"
+  ],
+  "devDependencies": {
+    "bootstrap": "~3.3.6",
+    "jquery": "~2.1.4"
+  }
+}

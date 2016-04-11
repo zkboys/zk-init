@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap Modals</title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                BootStrap Modal 封装
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <button type="button" class="btn btn-default w-alert">alert</button>
+                <button type="button" class="btn btn-default w-alert-fail">alertFail</button>
+                <button type="button" class="btn btn-default w-alert-success">alertSuccess</button>
+
+                <button type="button" class="btn btn-info w-confirm">confirm</button>
+
+                <button type="button" class="btn btn-warning showPreloader">showPreloader</button>
+                <button type="button" class="btn btn-warning hidePreloader">hidePreloader</button>
+
+                <button type="button" class="btn btn-danger toast">toast</button>
+                <button type="button" class="btn btn-danger toastFail">toastFail</button>
+                <button type="button" class="btn btn-danger toastSuccess">toastSuccess</button>
+
+                <button type="button" class="btn btn-primary promptInput">promptInput</button>
+                <button type="button" class="btn btn-success promptTextArea">promptTextArea</button>
+
+                <button type="button" class="btn btn-danger customer">customer</button>
+            </div>
+            <div class="text-form" style="display:none;">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile">File input</label>
+                        <input type="file" id="exampleInputFile">
+
+                        <p class="help-block">Example block-level help text here.</p>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> Check me out
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+</div>
+
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="dist/js/w-modal.min.js"></script>
+<script>
+    $('.w-alert').click(function () {
+        $.alert('我是弹框内容', '我是标题，哈哈', function () {
+            //$(this) 指向的是当前modal
+            console.log('点击了确定');
+        });
+//        $.alert('我只有内容，没有自定义标题和回调函数');
+    });
+    $('.w-alert-fail').click(function () {
+        $.alertFail('失败内容', "失败标题", function () {
+            console.log('点击了确定');
+        });
+    });
+    $('.w-alert-success').click(function () {
+        $.alertSuccess('成功内容', '成功标题', function () {
+            console.log('点击了确定');
+        });
+    });
+    $('.w-confirm').click(function () {
+        $.confirm('您确定吗？', '提示标题', function () {
+            console.log('点击了确定');
+        }, function () {
+            console.log('点击了取消按钮');
+        });
+    });
+    $('.showPreloader').click(function () {
+        $.showPreloader();
+        setTimeout(function () {
+            $.hidePreloader();
+        }, 2000);
+    });
+    $('.toast').click(function () {
+        $.toast('内容', '标题', function () {
+            console.log('关闭了');
+        });
+    });
+    $('.toastFail').click(function () {
+        $.toastFail('内容', '标题', function () {
+            console.log('关闭了');
+        });
+    });
+    $('.toastSuccess').click(function () {
+        $.toastSuccess('内容', '标题', function () {
+            console.log('关闭了');
+        });
+    });
+    $('.promptInput').click(function () {
+        $.promptInput('请输入您的姓名', '提示标题', function (value) {
+            console.log('您输入的内容是：' + value);
+        }, function (value) {
+            console.log('点击了取消按钮');
+        });
+    });
+    $('.promptTextArea').click(function () {
+        $.promptTextArea('多个标签以逗号分割', '提示标题', function (value) {
+            console.log('您输入的内容是：' + value);
+        }, function (value) {
+            console.log('点击了取消按钮');
+        });
+    });
+    $('.customer').click(function () {
+        $.wModal({
+            title: '自定义弹框',
+            content: $('.text-form').html(),
+            size: 'lg',
+            buttons: [
+                '<button type="button" class="btn btn-success w-sure" >确定</button>',
+                '<button type="button" class="btn btn-info w-customer" >自定义按钮组</button>',
+                '<button type="button" class="btn btn-danger w-cancel" >关闭</button>'
+            ],
+            showAnimate: true,
+            autoClose: false,
+            onOpened: function () {//弹框中的元素绑定事件，要在这个函数中
+                var modal = $(this);
+                modal.find('.btn.w-customer').click(function () {
+                    $.alert(11);
+                    console.log('click customer button');
+//                    modal.modal('hide');
+                });
+                console.log('customer modal opened');
+            },
+            onClosed: function () {
+                console.log('customer modal closed');
+            },
+            sureCallBack: function () {
+                console.log('customer modal click ok');
+            },
+            cancelCallBack: function () {
+                console.log('customer modal click cancel');
+            }
+        });
+    });
+</script>
+</body>
+</html>
