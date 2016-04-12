@@ -8,7 +8,6 @@
 本地的npm添加账户（上一步注册得账号）
 ```
 npm add user
-
 ```
 查看当前的用户是谁
 ```
@@ -52,7 +51,7 @@ sudo npm install zk-init -g
 ```
 查看版本
 ```
-zk-init -v
+zk-init -V // 大写得v
 或
 zk-init --version
 ```
@@ -64,10 +63,40 @@ zk-init --help
 ```
 ## 命令参数说明
 ```
--v --version 查看版本号
+-V --version 查看版本号
 -t --templatename 模板名
 -r --rename 重命名文件夹
--n --nofolder 没有顶层文件夹
+-f --folder 包含顶层文件夹
+```
+
+## 示例
+```
+zk-init jquery-simple
+或者
+zk-init -t jquery-simple
+you will get:
+- css
+- js
+- index.html
+
+```
+
+```
+zk-init -t jquery-simple -f
+you will get:
+- jquery-simple
+    - css
+    - js
+    - index.html
+```
+
+```
+zk-init -t jquery-simple -r jquery-web
+you will get:
+- jquery-web
+    - css
+    - js
+    - index.html
 ```
 
 ## 需要创建的项目模板
