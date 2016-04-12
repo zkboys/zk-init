@@ -36,7 +36,7 @@ if (!templateNameArr || !templateNameArr.length) {
     }
     return;
 } else {
-    //initTemplate(templateName);
+    initTemplate(templateName);
 }
 
 
