@@ -11,7 +11,8 @@ if (!program.message) {
     return
 }
 var packageJson = fs.readFileSync('./package.json');
-console.log(packageJson);
+
+console.log(JSON.parse(packageJson));
 
 exec("git add .", function (error, stdout, stderr) {
     stdout && console.log(stdout);
