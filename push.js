@@ -1,6 +1,6 @@
 var exec = require('child_process').exec;
 var program = require('commander');
-
+var fs = require('fs');
 program
     .version(require('./package').version)
     .usage('[options] <file ...>')
@@ -10,6 +10,9 @@ if (!program.message) {
     console.error('ERROR:请输入注释！！！');
     return
 }
+var packageJson = fs.readFileSync('./package.json');
+console.log(packageJson);
+
 exec("git add .", function (error, stdout, stderr) {
     stdout && console.log(stdout);
     stderr && console.log(stderr);
