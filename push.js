@@ -4,9 +4,13 @@ var program = require('commander');
 program
     .version(require('./package').version)
     .usage('[options] <file ...>')
-    .option(' -m, --message <说明>  ', '提交说明')
+    .option('-m, --message <说明>  ', '提交说明')
     .parse(process.argv);
-console.log(program.message);
+console.log(program.message, process.argv);
+if (!program.message) {
+    console.error('ERROR:请输入注释！！！');
+    return
+}
 exec("git add .", function (error, stdout, stderr) {
     stdout && console.log(stdout);
     stderr && console.log(stderr);
