@@ -10,10 +10,11 @@ if (!program.message) {
     console.error('ERROR:请输入注释！！！');
     return
 }
-var packageJson = fs.readFileSync('./package.json');
-
-console.log(JSON.parse(packageJson));
-
+var packageJson = JSON.parse(fs.readFileSync('./package.json'));
+var vs = packageJson.version.split('.').map(Number);
+var newVersion = vs[0] + '.' + vs[1] + '.' + (vs[2] + 1);
+console.log(newVersion);
+console.log(vs);
 exec("git add .", function (error, stdout, stderr) {
     stdout && console.log(stdout);
     stderr && console.log(stderr);
