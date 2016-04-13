@@ -38,9 +38,12 @@ var cfg = configs[runmod] || configs.development;
  * */
 var _entry = {
     //"index": ["./src/home/home.jsx", "./src/home/home-content.jsx"],//会合并成一个index.js
-    "index": './js/index.js',
+    "index": './index.js',
     "demo": './demo/demo.js'
 };
+if (runmod === 'devserver') {// 只有devserver模式，才加入监听html文件
+    _entry["watch-html"] = './watch-html.js';
+}
 
 /*
  * babel参数
