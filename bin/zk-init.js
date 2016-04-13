@@ -19,11 +19,16 @@ var templateName = program.templateName;
 if (program.args && program.args.length == 1) {
     templateName = program.args[0];
 }
+// 默认模板
+if (templateName === undefined) {
+    templateName = 'jquery-simple';
+}
 
 var templateNames = [
     'jquery-simple',
     'jquery-webpack'
 ];
+//根据输入命令行参数，查找对应的模板
 var templateNameArr = templateNames.filter(function (name, index) {
     return templateName === name;
 });
