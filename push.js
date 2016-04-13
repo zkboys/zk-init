@@ -17,7 +17,7 @@ exec("git add .", function (error, stdout, stderr) {
         console.log('git add error: ' + error);
         return;
     }
-    exec("git commit -m '测试'", function (error, stdout, stderr) {
+    exec("git commit -m '" + program.message + "'", function (error, stdout, stderr) {
         stdout && console.log(stdout);
         stderr && console.log(stderr);
         if (error !== null) {
