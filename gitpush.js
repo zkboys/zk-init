@@ -1,5 +1,12 @@
 var exec = require('child_process').exec;
+var program = require('commander');
 
+program
+    .version(require('./package').version)
+    .usage('[options] <file ...>')
+    .option(' -m, --message <说明>  ', '提交说明')
+    .parse(process.argv);
+console.log(program.message);
 exec("git add .", function (error, stdout, stderr) {
     stdout && console.log(stdout);
     stderr && console.log(stderr);
