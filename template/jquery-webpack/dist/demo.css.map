@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///webpack:///demo/demo.less"],"names":[],"mappings":"AAAA,KACE","file":"demo.css","sourcesContent":["body {\n  background: green;\n}\n\n\n\n/** WEBPACK FOOTER **\n ** webpack:///demo/demo.less\n **/"],"sourceRoot":""}
