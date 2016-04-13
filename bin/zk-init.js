@@ -11,11 +11,8 @@ var basename = path.basename;
 program
     .version(require('../package').version)
     .usage('[options] <file ...>')
-    .option('-t, --template-name <s>', 'The name of the template which you want to init')
-    .option('-r, --rename <s>', 'Rename the template')
-    .option('-f, --folder', 'Has folder')
     .parse(process.argv);
-var templateName = program.templateName;
+var templateName;
 if (program.args && program.args.length == 1) {
     templateName = program.args[0];
 }
@@ -48,25 +45,17 @@ if (!templateNameArr || !templateNameArr.length) {
 function initTemplate(templateName) {
     var cwd = join(__dirname, '../template', templateName);
     var dest = process.cwd();//返回运行当前脚本的工作目录的路径。
-    if (program.folder) {
-        dest = join(process.cwd(), templateName);
-    }
-    if (program.rename) {
-        dest = join(process.cwd(), program.rename);
-    }
     vfs.src('**/*', {cwd: cwd, cwdbase: true, dot: true})
         .pipe(template(dest))
         .pipe(vfs.dest(dest))
         .on('end', function () {
             fs.renameSync(path.join(dest, 'gitignore'), path.join(dest, '.gitignore'));
-            var packageJsonFile = 'package.json';
-            if (program.folder) {
-                packageJsonFile = program.folder + '/' + packageJsonFile
-            }
-            var needInstall = fs.existsSync(path.join(dest, packageJsonFile));
-            if (needInstall) {
+            var needInstall = fs.existsSync(path.join(dest, 'package.json'));
+            if(needInstall){
                 require('../lib/install');
             }
+
+
         })
         .resume();
 }

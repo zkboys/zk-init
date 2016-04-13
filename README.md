@@ -61,44 +61,17 @@ zk-init -h
 或
 zk-init --help
 ```
-## 命令参数说明
-```
--V --version 查看版本号
--t --templatename 模板名
--r --rename 重命名文件夹
--f --folder 包含顶层文件夹
-```
 
 ## 示例
 ```
 zk-init jquery-simple
-或者
-zk-init -t jquery-simple
+
 you will get:
 - css
 - js
 - index.html
 
 ```
-
-```
-zk-init -t jquery-simple -f
-you will get:
-- jquery-simple
-    - css
-    - js
-    - index.html
-```
-
-```
-zk-init -t jquery-simple -r jquery-web
-you will get:
-- jquery-web
-    - css
-    - js
-    - index.html
-```
-
 ## 需要创建的项目模板
 前端的项目，只提供webpack打包方式，提供less等集成
 
