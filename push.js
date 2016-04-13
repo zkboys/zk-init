@@ -6,7 +6,6 @@ program
     .usage('[options] <file ...>')
     .option('-m, --message <说明>  ', '提交说明')
     .parse(process.argv);
-console.log(program.message, process.argv);
 if (!program.message) {
     console.error('ERROR:请输入注释！！！');
     return
