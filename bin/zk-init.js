@@ -58,8 +58,13 @@ function initTemplate(templateName) {
         .pipe(template(dest))
         .pipe(vfs.dest(dest))
         .on('end', function () {
-            //fs.renameSync(path.join(dest, 'gitignore'), path.join(dest, '.gitignore'));
-            //require('../lib/install');
+            fs.renameSync(path.join(dest, 'gitignore'), path.join(dest, '.gitignore'));
+            var needInstall = fs.existsSync(path.join(dest, 'package.json'));
+            if(needInstall){
+                require('../lib/install');
+            }
+
+
         })
         .resume();
 }
