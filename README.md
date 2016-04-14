@@ -44,6 +44,9 @@ if (process.argv.length === 3 &&
 }
 ```
 注意：#!/usr/bin/env node，表明整个文件将以node方式运行，zk-init.js是一个node环境，要什么功能自由发挥吧。
+
+获取命令行参数有一个开源模块commander,可以生成版本信息 帮助信息等。[这里是官网](https://www.npmjs.com/package/commander)。
+
 ## 使用方式
 发布之后就可以通过npm安装了
 ```

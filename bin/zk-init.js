@@ -4,6 +4,7 @@ var vfs = require('vinyl-fs');
 var fs = require('fs');
 var through = require('through2');
 var path = require('path');
+var colors = require('colors');
 var join = path.join;
 var basename = path.basename;
 
@@ -11,6 +12,13 @@ var basename = path.basename;
 program
     .version(require('../package').version)
     .usage('[options] <file ...>')
+    .option('-v, --version', 'show version')
+    .on('--help', function () {
+        console.log('  Examples:');
+        console.log();
+        console.log('    $ zk-init [template name ]      default to jquery-simple template');
+        console.log();
+    })
     .parse(process.argv);
 var templateName;
 if (program.args && program.args.length == 1) {
@@ -31,10 +39,10 @@ var templateNameArr = templateNames.filter(function (name, index) {
 });
 
 if (!templateNameArr || !templateNameArr.length) {
-    console.log('No such template: %s', templateName);
-    console.log('You can use:');
+    console.log(colors.red('No such template: ' + templateName));
+    console.log(colors.red('You can use the template below:'));
     for (var i = 0; i < templateNames.length; i++) {
-        console.log(templateNames[i]);
+        console.log(colors.red(templateNames[i]));
     }
     return;
 } else {
@@ -51,11 +59,9 @@ function initTemplate(templateName) {
         .on('end', function () {
             fs.renameSync(path.join(dest, 'gitignore'), path.join(dest, '.gitignore'));
             var needInstall = fs.existsSync(path.join(dest, 'package.json'));
-            if(needInstall){
+            if (needInstall) {
                 require('../lib/install');
             }
-
-
         })
         .resume();
 }
@@ -65,7 +71,6 @@ function template(dest) {
         if (!file.stat.isFile()) {
             return cb();
         }
-
         console.log('Write %s', simplifyFilename(join(dest, basename(file.path))));
         this.push(file);
         cb();
