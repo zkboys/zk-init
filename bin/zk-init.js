@@ -12,7 +12,7 @@ var basename = path.basename;
 program
     .version(require('../package').version)
     .usage('[options] <file ...>')
-    .option('-v, --version', 'show version')
+    .option('-v, --version', 'output the version number')
     .on('--help', function () {
         console.log('  Examples:');
         console.log();
