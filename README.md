@@ -3,7 +3,7 @@
 ## 搭建过程 
 
 ### 创建npm账号
-再[官网](https://www.npmjs.com)上注册一个npm的账号
+在[官网](https://www.npmjs.com)上注册一个npm的账号
 
 本地的npm添加账户（上一步注册得账号）
 ```
