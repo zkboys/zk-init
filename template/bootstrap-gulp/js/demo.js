@@ -1,0 +1,1 @@
+alert('Everything is ok!');

@@ -31,7 +31,9 @@ if (templateName === undefined) {
 
 var templateNames = [
     'jquery-simple',
-    'jquery-webpack'
+    'jquery-webpack',
+    'jquery-gulp',
+    'bootstrap-gulp'
 ];
 //根据输入命令行参数，查找对应的模板
 var templateNameArr = templateNames.filter(function (name, index) {

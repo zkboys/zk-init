@@ -1,0 +1,14 @@
+{
+  "name": "w-modal",
+  "homepage": "https://github.com/zkboys/w-modal",
+  "version": "0.0.1",
+  "license": "MIT",
+  "ignore": [],
+  "keywords": [
+    "modal",
+    "bootstrap"
+  ],
+  "devDependencies": {
+    "jquery": "~2.1.4"
+  }
+}
