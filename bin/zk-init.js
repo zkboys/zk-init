@@ -7,18 +7,12 @@ var path = require('path');
 var colors = require('colors');
 var join = path.join;
 var basename = path.basename;
+// 这个文件下所有正常写得相对路相对的是 运行当前脚本的工作目录的路径,
+// 路径要使用join(__dirname,'../template')方式来写。
 
 // 所有的模板，与template下文件夹名称一一对应
-var templateNames = [
-    'jquery-simple',
-    'jquery-webpack',
-    'jquery-gulp',
-    'bootstrap-gulp'
-];
-var ts = fs.readdirSync(join(__dirname,'../template'))
-console.log(ts);
+var templateNames = fs.readdirSync(join(__dirname,'../template'));
 
-// 这个文件下所有正常写得相对路相对的是 命令 执行路径
 program
     .version(require('../package').version)
     .usage('[options] <file ...>')
