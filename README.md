@@ -7,22 +7,22 @@
 
 本地的npm添加账户（上一步注册得账号）
 ```
-npm add user
+$ npm add user
 ```
 查看当前的用户是谁
 ```
-npm whoami
+$ npm whoami
 ```
 
 发布到npm官网上
 ```
-npm publish
+$ npm publish
 ```
 注意：每次发布得时候记得改依稀package.json中的版本号，否则会发布失败
 
 按git标签发布
 ```
-npm publish --tag 0.1.0
+$ npm publish --tag 0.1.0
 ```
 
 ## 创建全局工具的方式
@@ -50,24 +50,24 @@ if (process.argv.length === 3 &&
 ## 使用方式
 发布之后就可以通过npm安装了
 ```
-sudo npm install zk-init -g
+$ sudo npm install zk-init -g
 ```
 查看版本
 ```
-zk-init -V // 大写得v
+$ zk-init -V // 大写得v
 或
-zk-init --version
+$ zk-init --version
 ```
 查看帮助
 ```
-zk-init -h
+$ zk-init -h
 或
-zk-init --help
+$ zk-init --help
 ```
 
 ## 示例
 ```
-zk-init jquery-simple
+$ zk-init jquery-simple
 
 you will get:
 - css
