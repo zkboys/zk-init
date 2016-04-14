@@ -8,6 +8,16 @@ var colors = require('colors');
 var join = path.join;
 var basename = path.basename;
 
+// 所有的模板，与template下文件夹名称一一对应
+var templateNames = [
+    'jquery-simple',
+    'jquery-webpack',
+    'jquery-gulp',
+    'bootstrap-gulp'
+];
+var ts = fs.readdirSync(join(__dirname,'../template'))
+console.log(ts);
+
 // 这个文件下所有正常写得相对路相对的是 命令 执行路径
 program
     .version(require('../package').version)
@@ -28,13 +38,6 @@ if (program.args && program.args.length == 1) {
 if (templateName === undefined) {
     templateName = 'jquery-simple';
 }
-
-var templateNames = [
-    'jquery-simple',
-    'jquery-webpack',
-    'jquery-gulp',
-    'bootstrap-gulp'
-];
 //根据输入命令行参数，查找对应的模板
 var templateNameArr = templateNames.filter(function (name, index) {
     return templateName === name;
