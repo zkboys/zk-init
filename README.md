@@ -45,7 +45,6 @@ if (process.argv.length === 3 &&
 ```
 注意：#!/usr/bin/env node，表明整个文件将以node方式运行，zk-init.js是一个node环境，要什么功能自由发挥吧。
 
-获取命令行参数有一个开源模块commander,可以生成版本信息 帮助信息等。[这里是官网](https://www.npmjs.com/package/commander)。
 
 ## 使用方式
 发布之后就可以通过npm安装了
@@ -93,5 +92,15 @@ webpack: // webpack 构建，提供less webpack-dev-server
 - python 
 - java 
 
-## 实现思路
-模板都单独放到github上，通过命令clone下来，并把.git文件夹删掉。这种方式不好，运行速度太慢了，而且断网情况下无法使用。
+## 开发过程中用到得几个模块
+commander
+获取命令行参数,可以生成版本信息 帮助信息等。
+https://www.npmjs.com/package/commander
+
+vinyl-fs
+文件处理
+https://www.npmjs.com/package/vinyl-fs#what-is-vinyl
+
+colors 
+终端输出颜色
+https://www.npmjs.com/package/colors
